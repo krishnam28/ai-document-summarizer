@@ -54,6 +54,33 @@ class TextInput(BaseModel):
 @app.get("/")
 def root():
     return {"status": "Backend is running"}
+    
+@app.post("/summarize")
+def summarize(input: TextInput):
+
+    chunks = split_text(input.text)
+
+    summaries = []
+
+    for chunk in chunks:
+        payload = {
+            "inputs": chunk,
+            "parameters": {
+                "max_length": input.max_length,
+                "min_length": input.min_length
+            }
+        }
+
+        response = requests.post(API_URL, headers=headers, json=payload)
+        result = response.json()
+
+        if isinstance(result, list):
+            summaries.append(result[0]["summary_text"])
+
+    combined_summary = " ".join(summaries)
+
+    return {"summary": combined_summary}
+
 @app.post("/summarize-file")
 async def summarize_file(file: UploadFile = File(...)):
 
