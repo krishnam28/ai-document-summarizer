@@ -17,7 +17,7 @@ export default function App() {
     setSummary("");
 
     try {
-      const res = await fetch("http://localhost:8000/summarize", {
+      const res = await fetch("https://ai-document-summarizer-1.onrender.com/summarize", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -44,7 +44,7 @@ export default function App() {
   formData.append("file", file);
 
   try {
-    const res = await fetch("http://localhost:8000/summarize-file", {
+    const res = await fetch("https://ai-document-summarizer-1.onrender.com/summarize-file", {
       method: "POST",
       body: formData
     });
