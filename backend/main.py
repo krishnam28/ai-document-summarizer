@@ -22,7 +22,6 @@ app.add_middleware(
 HF_API_TOKEN = os.getenv("HF_API_TOKEN")
 API_URL = "https://router.huggingface.co/hf-inference/models/sshleifer/distilbart-cnn-12-6"
 headers = {"Authorization": f"Bearer {HF_API_TOKEN}"}
-print("TOKEN:", HF_API_TOKEN)
 
 def split_text(text, chunk_size=800):
     words = text.split()
